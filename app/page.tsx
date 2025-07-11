@@ -1,103 +1,139 @@
-import Image from "next/image";
+"use client";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Calculator, FileText, BarChart3, HelpCircle, Brain } from "lucide-react";
+import InputSection from "@/components/input-section";
+import OutputSection from "@/components/output-section";
+import StepsSection from "@/components/steps-section";
+import VisualizationSection from "@/components/visualization-section";
+import HelpSection from "@/components/help-section";
+import LanguageSelector from "@/components/language-selector";
+import { SolverProvider } from "@/contexts/solver-context";
+import { useLanguage } from "@/contexts/language-context";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
-export default function Home() {
+export default function GaussSolver() {
+  const { t } = useLanguage();
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <SolverProvider>
+      <div className="flex flex-col min-h-screen bg-[#121212] text-white">
+        {/* Header */}
+        <header className="border-b border-gray-800 bg-[#1a1a1a]">
+          <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <Brain className="h-6 w-6 sm:h-8 sm:w-8 text-[#00ADB5]" />
+                <h1 className="text-xl sm:text-3xl font-bold">Gauss Solver</h1>
+              </div>
+              <LanguageSelector />
+            </div>
+            <p className="text-center text-gray-400 mt-2 text-sm sm:text-base">{t("app.subtitle")}</p>
+          </div>
+        </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        {/* Main Content */}
+        <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-8 flex-grow">
+          <Tabs defaultValue="input" className="w-full">
+            <div className="overflow-x-auto pb-2">
+              <TooltipProvider>
+                <TabsList className="flex w-max min-w-full bg-[#1a1a1a] border border-gray-800 p-1">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <TabsTrigger value="input" className="flex-1 data-[state=active]:bg-[#00ADB5] data-[state=active]:text-white px-3 sm:px-4">
+                        <Calculator className="h-5 w-5 sm:h-4 sm:w-4 sm:mr-2" />
+                        <span className="hidden sm:inline">{t("tabs.input")}</span>
+                      </TabsTrigger>
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom" className="sm:hidden">
+                      {t("tabs.input")}
+                    </TooltipContent>
+                  </Tooltip>
+
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <TabsTrigger value="output" className="flex-1 data-[state=active]:bg-[#00ADB5] data-[state=active]:text-white px-3 sm:px-4">
+                        <FileText className="h-5 w-5 sm:h-4 sm:w-4 sm:mr-2" />
+                        <span className="hidden sm:inline">{t("tabs.output")}</span>
+                      </TabsTrigger>
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom" className="sm:hidden">
+                      {t("tabs.output")}
+                    </TooltipContent>
+                  </Tooltip>
+
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <TabsTrigger value="steps" className="flex-1 data-[state=active]:bg-[#00ADB5] data-[state=active]:text-white px-3 sm:px-4">
+                        <BarChart3 className="h-5 w-5 sm:h-4 sm:w-4 sm:mr-2" />
+                        <span className="hidden sm:inline">{t("tabs.steps")}</span>
+                      </TabsTrigger>
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom" className="sm:hidden">
+                      {t("tabs.steps")}
+                    </TooltipContent>
+                  </Tooltip>
+
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <TabsTrigger value="visualization" className="flex-1 data-[state=active]:bg-[#00ADB5] data-[state=active]:text-white px-3 sm:px-4">
+                        <BarChart3 className="h-5 w-5 sm:h-4 sm:w-4 sm:mr-2" />
+                        <span className="hidden sm:inline">{t("tabs.visualization")}</span>
+                      </TabsTrigger>
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom" className="sm:hidden">
+                      {t("tabs.visualization")}
+                    </TooltipContent>
+                  </Tooltip>
+
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <TabsTrigger value="help" className="flex-1 data-[state=active]:bg-[#00ADB5] data-[state=active]:text-white px-3 sm:px-4">
+                        <HelpCircle className="h-5 w-5 sm:h-4 sm:w-4 sm:mr-2" />
+                        <span className="hidden sm:inline">{t("tabs.help")}</span>
+                      </TabsTrigger>
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom" className="sm:hidden">
+                      {t("tabs.help")}
+                    </TooltipContent>
+                  </Tooltip>
+                </TabsList>
+              </TooltipProvider>
+            </div>
+
+            <div className="mt-6">
+              <TabsContent value="input">
+                <InputSection />
+              </TabsContent>
+
+              <TabsContent value="output">
+                <OutputSection />
+              </TabsContent>
+
+              <TabsContent value="steps">
+                <StepsSection />
+              </TabsContent>
+
+              <TabsContent value="visualization">
+                <VisualizationSection />
+              </TabsContent>
+
+              <TabsContent value="help">
+                <HelpSection />
+              </TabsContent>
+            </div>
+          </Tabs>
+        </main>
+
+        {/* Footer */}
+        <footer className="border-t border-gray-800 bg-[#1a1a1a] mt-auto">
+          <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6">
+            <div className="text-center text-gray-400">
+              <p className="text-sm sm:text-base">© 2025 Gauss Solver - Rizal Rorschach</p>
+              <p className="text-xs sm:text-sm mt-1">Numerical Methods Implementation</p>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </SolverProvider>
   );
 }
