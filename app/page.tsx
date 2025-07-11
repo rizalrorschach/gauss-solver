@@ -27,7 +27,6 @@ export default function GaussSolver() {
               </div>
               <LanguageSelector />
             </div>
-            <p className="text-center text-gray-400 mt-2 text-sm sm:text-base">{t("app.subtitle")}</p>
           </div>
         </header>
 
