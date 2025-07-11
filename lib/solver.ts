@@ -1,11 +1,10 @@
 import type { SolutionResult, SolutionMethod, MatrixStep } from "@/contexts/solver-context";
 
 export async function solveLinearSystem(matrix: number[][], vector: number[], method: SolutionMethod): Promise<SolutionResult> {
-  const n = matrix.length;
   const steps: MatrixStep[] = [];
 
   // Create augmented matrix copy
-  const augMatrix = matrix.map((row, i) => [...row]);
+  const augMatrix = matrix.map((row) => [...row]);
   const augVector = [...vector];
 
   // Add initial step

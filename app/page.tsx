@@ -1,6 +1,6 @@
 "use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calculator, FileText, BarChart3, HelpCircle, Brain } from "lucide-react";
+import { Calculator, FileText, BarChart3, HelpCircle, Brain, Github } from "lucide-react";
 import InputSection from "@/components/input-section";
 import OutputSection from "@/components/output-section";
 import StepsSection from "@/components/steps-section";
@@ -129,6 +129,11 @@ export default function GaussSolver() {
             <div className="text-center text-gray-400">
               <p className="text-sm sm:text-base">© 2025 Gauss Solver - Rizal Rorschach</p>
               <p className="text-xs sm:text-sm mt-1">Numerical Methods Implementation</p>
+              <div className="mt-3 flex justify-center">
+                <a href="https://github.com/rizalrorschach/gauss-solver" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-gray-400 hover:text-white transition-colors" aria-label="GitHub Repository">
+                  <Github className="h-5 w-5" />
+                </a>
+              </div>
             </div>
           </div>
         </footer>

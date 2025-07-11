@@ -2,7 +2,6 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Download, CheckCircle, XCircle, AlertTriangle } from "lucide-react";
 import { useSolver } from "@/contexts/solver-context";
 import { useLanguage } from "@/contexts/language-context";
@@ -37,19 +36,7 @@ export default function OutputSection() {
     }
   };
 
-  const getStatusBadge = () => {
-    if (!state.result) return null;
-
-    const statusConfig = {
-      solved: { color: "bg-[#4CAF50]", text: t("output.status.solved") },
-      "no-solution": { color: "bg-[#FF3D3D]", text: t("output.status.noSolution") },
-      "infinite-solutions": { color: "bg-[#F8B400]", text: t("output.status.infiniteSolutions") },
-      error: { color: "bg-[#FF3D3D]", text: t("output.status.error") },
-    };
-
-    const config = statusConfig[state.result.status];
-    return <Badge className={`${config.color} text-white py-1 px-2.5 text-xs sm:text-sm rounded-md`}>{config.text}</Badge>;
-  };
+  // Removed unused getStatusBadge function
 
   const handleExport = async (format: "pdf" | "txt") => {
     if (!state.result) return;
