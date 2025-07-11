@@ -44,7 +44,15 @@ export default function GaussSolver() {
                 <TabsList className="flex w-max min-w-full bg-[#1a1a1a] border border-gray-800 p-1">
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <TabsTrigger value="input" className="flex-1 data-[state=active]:bg-[#00ADB5] data-[state=active]:text-white px-3 sm:px-4">
+                      <TabsTrigger
+                        value="input"
+                        className="flex-1 px-3 sm:px-4"
+                        style={{
+                          backgroundColor: activeTab === "input" ? "#00ADB5" : undefined,
+                          color: activeTab === "input" ? "white" : undefined,
+                          borderColor: activeTab === "input" ? "transparent" : undefined,
+                        }}
+                      >
                         <Calculator className="h-5 w-5 sm:h-4 sm:w-4 sm:mr-2" />
                         <span className="hidden sm:inline">{t("tabs.input")}</span>
                       </TabsTrigger>
@@ -56,7 +64,15 @@ export default function GaussSolver() {
 
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <TabsTrigger value="output" className="flex-1 data-[state=active]:bg-[#00ADB5] data-[state=active]:text-white px-3 sm:px-4">
+                      <TabsTrigger
+                        value="output"
+                        className="flex-1 px-3 sm:px-4"
+                        style={{
+                          backgroundColor: activeTab === "output" ? "#00ADB5" : undefined,
+                          color: activeTab === "output" ? "white" : undefined,
+                          borderColor: activeTab === "output" ? "transparent" : undefined,
+                        }}
+                      >
                         <FileText className="h-5 w-5 sm:h-4 sm:w-4 sm:mr-2" />
                         <span className="hidden sm:inline">{t("tabs.output")}</span>
                       </TabsTrigger>
@@ -68,7 +84,15 @@ export default function GaussSolver() {
 
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <TabsTrigger value="steps" className="flex-1 data-[state=active]:bg-[#00ADB5] data-[state=active]:text-white px-3 sm:px-4">
+                      <TabsTrigger
+                        value="steps"
+                        className="flex-1 px-3 sm:px-4"
+                        style={{
+                          backgroundColor: activeTab === "steps" ? "#00ADB5" : undefined,
+                          color: activeTab === "steps" ? "white" : undefined,
+                          borderColor: activeTab === "steps" ? "transparent" : undefined,
+                        }}
+                      >
                         <BarChart3 className="h-5 w-5 sm:h-4 sm:w-4 sm:mr-2" />
                         <span className="hidden sm:inline">{t("tabs.steps")}</span>
                       </TabsTrigger>
@@ -80,7 +104,15 @@ export default function GaussSolver() {
 
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <TabsTrigger value="visualization" className="flex-1 data-[state=active]:bg-[#00ADB5] data-[state=active]:text-white px-3 sm:px-4">
+                      <TabsTrigger
+                        value="visualization"
+                        className="flex-1 px-3 sm:px-4"
+                        style={{
+                          backgroundColor: activeTab === "visualization" ? "#00ADB5" : undefined,
+                          color: activeTab === "visualization" ? "white" : undefined,
+                          borderColor: activeTab === "visualization" ? "transparent" : undefined,
+                        }}
+                      >
                         <BarChart3 className="h-5 w-5 sm:h-4 sm:w-4 sm:mr-2" />
                         <span className="hidden sm:inline">{t("tabs.visualization")}</span>
                       </TabsTrigger>
@@ -92,7 +124,15 @@ export default function GaussSolver() {
 
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <TabsTrigger value="help" className="flex-1 data-[state=active]:bg-[#00ADB5] data-[state=active]:text-white px-3 sm:px-4">
+                      <TabsTrigger
+                        value="help"
+                        className="flex-1 px-3 sm:px-4"
+                        style={{
+                          backgroundColor: activeTab === "help" ? "#00ADB5" : undefined,
+                          color: activeTab === "help" ? "white" : undefined,
+                          borderColor: activeTab === "help" ? "transparent" : undefined,
+                        }}
+                      >
                         <HelpCircle className="h-5 w-5 sm:h-4 sm:w-4 sm:mr-2" />
                         <span className="hidden sm:inline">{t("tabs.help")}</span>
                       </TabsTrigger>
