@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calculator, FileText, BarChart3, HelpCircle, Brain, Github } from "lucide-react";
 import InputSection from "@/components/input-section";
@@ -13,6 +14,11 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 
 export default function GaussSolver() {
   const { t } = useLanguage();
+  const [activeTab, setActiveTab] = useState("input");
+
+  const handleSolvingComplete = () => {
+    setActiveTab("output");
+  };
 
   return (
     <SolverProvider>
@@ -32,7 +38,7 @@ export default function GaussSolver() {
 
         {/* Main Content */}
         <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-8 flex-grow">
-          <Tabs defaultValue="input" className="w-full">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <div className="overflow-x-auto pb-2">
               <TooltipProvider>
                 <TabsList className="flex w-max min-w-full bg-[#1a1a1a] border border-gray-800 p-1">
@@ -101,7 +107,7 @@ export default function GaussSolver() {
 
             <div className="mt-6">
               <TabsContent value="input">
-                <InputSection />
+                <InputSection onSolvingComplete={handleSolvingComplete} />
               </TabsContent>
 
               <TabsContent value="output">
@@ -127,7 +133,12 @@ export default function GaussSolver() {
         <footer className="border-t border-gray-800 bg-[#1a1a1a] mt-auto">
           <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6">
             <div className="text-center text-gray-400">
-              <p className="text-sm sm:text-base">© 2025 Gauss Solver - Rizal Rorschach</p>
+              <p className="text-sm sm:text-base">
+                © 2025 Gauss Solver -{" "}
+                <a href="https://rizalize.com" target="_blank" rel="noopener noreferrer" className="text-[#00ADB5] hover:text-[#00ADB5]/80 transition-colors">
+                  Rizal Rorschach
+                </a>
+              </p>
               <p className="text-xs sm:text-sm mt-1">Numerical Methods Implementation</p>
               <div className="mt-3 flex justify-center">
                 <a href="https://github.com/rizalrorschach/gauss-solver" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-gray-400 hover:text-white transition-colors" aria-label="GitHub Repository">

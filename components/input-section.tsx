@@ -12,7 +12,11 @@ import { useSolver, type SolutionMethod } from "@/contexts/solver-context";
 import { useLanguage } from "@/contexts/language-context";
 import { solveLinearSystem } from "@/lib/solver";
 
-export default function InputSection() {
+interface InputSectionProps {
+  onSolvingComplete?: () => void;
+}
+
+export default function InputSection({ onSolvingComplete }: InputSectionProps) {
   const { state, dispatch } = useSolver();
   const { t } = useLanguage();
   const [method, setMethod] = useState<SolutionMethod>("gauss");
@@ -63,6 +67,11 @@ export default function InputSection() {
     try {
       const result = await solveLinearSystem(state.matrix, state.vector, method);
       dispatch({ type: "SET_RESULT", payload: result });
+
+      // Auto-switch to output tab when solving completes successfully
+      if (onSolvingComplete) {
+        onSolvingComplete();
+      }
     } catch (error) {
       dispatch({ type: "SET_ERROR", payload: error instanceof Error ? error.message : "Unknown error" });
     }
